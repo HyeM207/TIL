@@ -20,8 +20,6 @@ docker pull [옵션] 이미지명[:TAG|@DIGEST]
 ```
 - 도커 공식 이미지 저장소인 docker hub에서 이미지를 다운로드 함
 
-<br>
-
 #### 이미지 조회
 ``` shell
 docker images
@@ -30,7 +28,7 @@ docker images
 
 <br>
 
-#### 컨테이너 목록 확인
+### 컨테이너 목록 확인
 ``` shell
 docker ps
 ```
