@@ -16,7 +16,7 @@
 - 커밋 메시지 형식은 header 1개, body 1개, footer 1개로 구성되고 각각은 공백 줄로 구분됨
     - `header` : 필수 작성. 커밋 형식 꼭 맞추기
     - `body` : docs 타입 빼고는 필수 작성. 본문이 있으면 최소 20자 이상이고 형식 맞춰서 작성
-    - `footer` : 선택 사항.  
+    - `footer` : 선택 사항  
 
 <br/>
 
@@ -40,10 +40,13 @@
 - feat (새 기능 추가)
 - fix (버그 수정)
 - docs (문서화)
-- style (포맷팅, 세미콜론 누락 등)
 - refactor (코드 리팩토링)
-- test (테스트 관련)
+- test (테스트 추가 및 수정 등)
 - chore (유지보수 등 그 외 수정사항)
+- build (빌드나, 외부 dependency에 영향 준 변경사항 ex. npm, gulp 등)
+- ci(CI 관련 설정 파일 및 스크립트 변경)
+- perf(성능 향상시킨 코드 변경)
+- style (포맷팅, 세미콜론 누락 등)
 
 </br>
 
@@ -67,7 +70,7 @@ commit한 부분의 구체적 범위를 작성. ex. $location, $browser, $compil
 </br>
 
 ## (3) Footer 형식 구성
-- reaking Change(주요 변경사항)에 대한 정보를 포함하거나, GitHub 이슈 등을 적을 수 있는 부분  
+- Breaking Change(주요 변경사항)에 대한 정보를 포함하거나, GitHub 이슈 등을 적을 수 있는 부분  
 
 ### Breaking Change(주요 변경사항) 경우  
 ```html
