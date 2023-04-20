@@ -152,6 +152,7 @@ ActionChains(driver).send_keys_to_element(id_input, "자신의 id").perform()
 
 프로그래머스 사이트 디자인이 바뀌어, 강의 내용 그대로 코드를 돌리면 오류가 발생한다. 이를 해결한 과정과 완성된 코드를 아래 첨부한다. 
 ```python
+# 오류 없는 코드
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
@@ -188,3 +189,29 @@ ActionChains(driver).click(login_btn).perform()
 time.sleep(1)
 
 ```
+<br>
+
+### 🔥 오류 분석과 해결과정
+만약 로그인 button 을 찾는 코드를 강의 내용처럼 아래 코드로 작성하면 오류가 발생한다.   
+```python
+button = driver.find_element(By.CLASS_NAME, "ReBoJZjit5lOjyMKk0bT").click()
+ActionChains(driver).click().perform()
+```
+발생한 에러와 원인 그리고 그 해결과정을 아래에 정리해보았다.   
+
+- 에러 이름 : ElementNotInteractableException
+
+- 원인 :
+    - className만으로 `<a>` 태그에 접근 불가함 
+    - 로그인 클릭하는 부분이 버튼이 아닌 `<a>` 태그라 click() 상호작용이 안되는 것으로 보임 
+
+[ 원인 1 해결 과정 ]  
+- 원인 1 해결 방법 : XPath로 접근함 -> 성공
+- 분석 : `<a>` 태그를 못 찾는것이 아닌가 해서 get_attribute로 class와 href를 출력해봤을 때는 잘 불러왔음 ->  `<a>` 태그 접근하는덴 문제 없음
+
+[ 원인 2 해결 과정 ]  
+- 시도 1: ActionChains(driver).move_to_element(button).click().perform() 로 바꿔서 해봄 -> 해결 X
+- 시도 2: ActionChain이 아닌 Button 자체에서 click()함수와 send_keys(Keys.ENTER) 함수 써봄 -> 해결 X
+- 시도 3: ChatGPT에서 알려준 자바스크립트로 요소를 찾을때 까지 스크롤해서 클릭을 강제하는 코드를 작성함 -> 성공 !!!!!!
+
+✅ 정리 : XPath로 접근 방식 바꾸고, 클릭을 강제하는 자바스크립트 코드로 해결함
