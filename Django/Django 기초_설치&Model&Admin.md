@@ -266,4 +266,64 @@ from .models import *
 admin.site.register(Question)
 admin.site.register(Choice)
 ```
+<br>
 
+## #️⃣ Admin 페이지 커스터마이징
+### ✅ models.py
+- `verbose_name` : 칼럼 표시명 지정
+- `@admin.display()` : admin 페이지 레이아웃 지정
+    - `boolean` : True시 이모지로 UI표현
+    -  `description` : 칼럼 표시명 지정
+```python
+from django.db import models
+from django.utils import timezone
+import datetime
+from django.contrib import admin
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200, verbose_name='질문')
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='생성일')  
+
+    @admin.display(boolean=True, description='최근생성(하루기준)')
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+
+    # 출력시 기본 형태 지정
+    def __str__(self):
+        return f'제목: {self.question_text}, 날짜: {self.pub_date}'
+```
+<br>
+
+### ✅ admin.py
+- `fieldsets` : 표에 표시할 field 지정 (순서대로 출력)
+    - `'classes': ['collapse']` : 펼치고 닫을 수 있음 
+- `list_display` : 표에서 보여줄 칼럼 지정 
+- `readonly_fields` : 수정 불가 
+- `inlines` : 인라인 설정 (다른 model을 인라인으로 보여줌)
+- `list_filter` : 필터 생성
+- `search_fields` : 검색 옵션 설정 
+
+```python
+from django.contrib import admin
+from .models import *
+
+class ChoiceInline(admin.TabularInline): # 수직으로 인라인 삽입
+    model = Choice
+    extra = 3 # 보여줄 최대 개수 
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    # fieldset에 작성한 순서대로 UI에보여짐
+    #  (섹션, {'fields': [ 보여줄 값] })
+    fieldsets = [
+        ('질문 섹션', {'fields': ['question_text']}),
+        ('생성일', {'fields': ['pub_date'], 'classes': ['collapse']}),  # collapse 옵션으로 펼치고 닫을 수 있음      
+    ]
+    list_display = ('question_text', 'pub_date', 'was_published_recently') #표에서 칼럼 만들어서 따로 보여줌
+    readonly_fields = ['pub_date']  #읽기모드
+    inlines = [ChoiceInline] # 인라인 설정
+    list_filter = ['pub_date'] # 필터 생성
+    search_fields = ['question_text', 'choice__choice_text'] # 검색창 생성
+
+admin.site.register(Question, QuestionAdmin)
+```
