@@ -16,7 +16,7 @@
 <br><br>
 <hr>
 
-# SQL DDL
+# 📌 SQL DDL
 > 테이블 구조 정의 언어
 
 ## #️⃣ CREATE TABLE
