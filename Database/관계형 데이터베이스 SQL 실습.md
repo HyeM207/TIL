@@ -281,7 +281,7 @@ FROM adhoc.hyemin_session_summary;
 
 # 📌 예제4- 응용
 > 3일차 숙제
-## 채널별 월별 매출액 테이블 만들기 
+## #️⃣ 채널별 월별 매출액 테이블 만들기 
 > adhoc 밑에 CTAS로 본인이름을 포함한 테이블로 만들기
 - session_timestamp,user_session_channel,session_transaction 사용
 - 아래와 같은 필드로 구성
@@ -294,7 +294,7 @@ FROM adhoc.hyemin_session_summary;
   - netRevenue (refund 제외)
 
 
-## 과제 제출물 
+### ✅ 과제 제출물 
 ```sql
 SELECT 
     TO_CHAR(c.ts, 'YYYY-MM') AS month,
@@ -310,3 +310,26 @@ JOIN raw_data.session_timestamp C ON A.sessionid = C.sessionid
 GROUP BY 1, 2 
 ORDER BY 1 DESC, 2;
 ```
+
+<br>
+
+### ✅ 과제 정답
+```sql
+SELECT 
+  LEFT(ts, 7) "month", 
+  channel,
+  COUNT(DISTINCT usc.userid) uniqueUsers,
+  COUNT(DISTINCT CASE WHEN amount > 0 THEN usc.userid END) paidUsers,
+  ROUND(paidUsers::float*100/NULLIF(uniqueUsers, 0),2) conversionRate,
+  SUM(amount) grossRevenue,
+  SUM(CASE WHEN refunded is False THEN amount END) netRevenue
+FROM raw_data.user_session_channel usc
+LEFT JOIN raw_data.session_timestamp t ON t.sessionid = usc.sessionid
+LEFT JOIN raw_data.session_transaction st ON st.sessionid = usc.sessionid
+GROUP BY 1, 2
+```
+- `paidUsers` : amount > 0으로 처리
+  - `amount IS NOT NULL` 이 아니고 __0도 아닌 경우__ 를 카운트해야됨 ‼
+- `conversionRate` : 해당 값을 구할 때 분모가 0인 경우를 `NULLIF`로 처리해줘야 됨 + %률로 바꾸기
+- `netRevenue` : `refunded is False`는 자동으로 __NULL을 제외하고 오직 FALSE인 값만 카운트함__
+  - `amount IS NOT NULL AND refunded is False` 처럼 이중 처리할 필요 없음 ‼ 
