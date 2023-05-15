@@ -65,6 +65,12 @@ Production 모드로 좋음
 ## #️⃣ 실습 
 블로그 : [[AWS-SAA] Elastic Beanstalk 구축 실습](https://hyem207.tistory.com/91)
 
+추가 내용 :
+- cd /var/app에 애플리케이션 소스코드 있음 
+- /var/log 에 로그 파일  있음
+    - web.stdout.log에 많음
+    - 자체 로그는 eb-engine.log 
+    - 로그를 aws console (UI)로도 보고 다운로드 가능함
 
 <br><br>
 
