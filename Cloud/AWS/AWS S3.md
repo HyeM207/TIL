@@ -1,4 +1,5 @@
 # 📌 AWS Simple Storage Service
+![amazon s3](https://d1.awsstatic.com/s3-pdp-redesign/product-page-diagram_Amazon-S3_HIW.cf4c2bd7aa02f1fe77be8aa120393993e08ac86d.png)
 
 > 객체 스토리지 서비스
 > 
@@ -62,14 +63,14 @@ S3에 저장되는 기본 개체
 1. 버킷 들어가서 ‘업로드’ 선택
 2. 파일 및 폴더 추가로 드래그 및 선택으로 업로드 가능
     - index.html을 올리면 웹 정적 호스팅 구성 가능
-3. 버킷의 속성에서 **“정적 웹 사이트 호스팅”**을 활성화 함
-    - **“인덱스 문서”**에서 기본 페이지 지정
+3. 버킷의 속성에서 __'정적 웹 사이트 호스팅'__ 을 활성화 함
+    - __'인덱스 문서'__ 에서 기본 페이지 지정
     - 활성화하면 접속 가능한 정적 웹사이트의 URL 생김
-4. 버킷의 권한 탭에서**”퍼블릭 액세스 차단”** 해제 
+4. 버킷의 권한 탭에서 __'퍼블릭 액세스 차단'__ 해제 
     - 버킷 정책 편집에서 JSON 수정함
-        1. **‘정책 생성기’** 클릭 
+        1. __‘정책 생성기’__ 클릭 
         2. Policy type : **S3 bucket policy**
-        3. Add statement : **allow** effect, ***** principle, **all actions**  
+        3. Add statement : **allow** effect, \* principle, **all actions**  
         4. ARN : 버킷의 ARN 복사하고 + “**/*”** 라고 추가
         (버킷 내의 모든 파일에 대해 access 가능하도록 함)
         5. **Add statement** 과 **generate policy** 버튼 눌러서 정책 생성 후 **만들어진 json을 버킷 정책에 넣음**
