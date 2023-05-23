@@ -131,9 +131,9 @@ Diststyle이 key인 경우 컬럼 선택이 잘못되면, 레코드 분포에 `S
 ```
             DEV
              |
-    ----------------------
-    |        |           |
-raw_data    analytics   adhoc
+    -------------------------------
+    |        |           |        |
+raw_data    analytics   adhoc     pii
 ``` 
 - Redshift, PostgreSQL는 위의 폴더를 `스키마`라고 부름
 - `CREATE SCHEMA (폴더명)`을 관리자 권한을 가진 사람이 만들 수 있음
@@ -141,3 +141,5 @@ raw_data    analytics   adhoc
     - raw_data : ETL로 가져온 데이터 적재
     - analytics : 데이터 애널리스티가 주로 관리, raw_data에 있는 데이터를 요약하여 해당 폴더에 저장 및 대시보드 만듦
     - adhoc : 개발자나 데이터 종사자들이 테스트 용도로 사용
+    - pii : 개인정보 들어감
+        - 권한있는 사람만 접근 가능하도록 하며, 권한 가진 사용자 수를 최소한으로 설정  
