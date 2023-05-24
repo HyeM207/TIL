@@ -318,6 +318,21 @@ location 's3:/bucket명/경로/*.csv';
 
 - AWS SageMaker에 의해 지원되며 (1) 이미 만든 모델을 적용하거나, (2) SageMaker의 `Auto Pilot` 기능으로 기계학습에 대해 최적화된 모델을 자동 생성해주는 기능을 사용할 수 있음
 
+<details><summary> ✔ AWS SageMaker</summary>
+
+>  머신러닝 모델 개발 처음~끝까지 해결해주는 AWS 서비스 (MLOps 프레임워크)
+
+- 제공 기능 4가지 : 트레이닝 셋 준비, 모델훈련, 모델검증, 모델배포와 관리
+- Tensorflow/Keras, Pytorch 그리고 자체 SageMaker 모듈까지 다양한 머신러닝 프레임워크 지원
+- SageMaker Studio(웹기반 노트북 환경)
+- 다양한 개발 방식 지원
+    - python,scala, java
+    - 코딩 안해도 자동으로 모델 훈련 기능 코드 만들어주는 AutoPilot 
+- AutoML : 모델빌딩으로 train dataset주면 자동으로 모델 만들어줌
+    - train만 주면 데이터분석, 하이터파라미터 조합, 테스트 등등 다음단계 자동으로 수행함
+- 최종적으로 사용자가 모델 선택 후 API 만들 수 있음
+</details>
+
 
 <br><br>
 
@@ -347,4 +362,6 @@ location 's3:/bucket명/경로/*.csv';
 <br><br>
 
 # 실습 
+[Redshift_Serverless_실습.ipynb](https://github.com/HyeM207/TIL/blob/main/Cloud/AWS/Hands-on/Redshift_Serverless_%EC%8B%A4%EC%8A%B5_Day2.ipynb) 
+
 [GoogleDocs-8주차 3일차 과제](https://docs.google.com/document/d/1LrshdvMwtwKmxjmbUyCLgASRHVjv3iBg5IV2VVfMoAE/edit?usp=sharing)
